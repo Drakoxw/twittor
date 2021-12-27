@@ -20,11 +20,12 @@ func BuscarUsuario(email string) (models.Usuario, bool, string) {
 
 	var r models.Usuario
 
-	err := coll.FindOne(ctx, condicion).Decode(&r)
+	er := coll.FindOne(ctx, condicion).Decode(&r)
 
 	id := r.ID.Hex()
-	if err != nil {
-		return r, false, id
+
+	if er != nil {
+		return r, false, ""
 	}
 
 	return r, true, id

@@ -7,6 +7,7 @@ import (
 	"github.com/Drakoxw/twittor/handlers"
 )
 
+// heroku: https://drako-twittor.herokuapp.com/
 func main() {
 	if db.CheckConect() == 0 {
 		log.Fatal("Sin connexión a la Base de Datos")
