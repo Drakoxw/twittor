@@ -59,10 +59,3 @@ func Registro(rw http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(rw).Encode(us)
 
 }
-
-func ResponseErr(rw http.ResponseWriter, msgErr string, statusCode int) {
-	data := HttpErr2{Err: true, Msg: msgErr}
-	rw.Header().Set("Content-Type", "application/json")
-	rw.WriteHeader(statusCode)
-	json.NewEncoder(rw).Encode(data)
-}

@@ -9,6 +9,8 @@ import (
 )
 
 var ctx = context.TODO()
+
+/*MongoC => el cliente ya conectado*/
 var MongoC = ConectarBD()
 var clientOptions = options.Client().ApplyURI("mongodb+srv://DrakoMaster:wolfW12345@drako-db.fguhd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 
@@ -36,11 +38,3 @@ func CheckConect() int {
 	}
 	return 1
 }
-
-/* eee
-ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-defer cancel()
-client, err := mongo.Connect(ctx, clientOptions)
-if err != nil {
-    log.Fatal(err)
-} */

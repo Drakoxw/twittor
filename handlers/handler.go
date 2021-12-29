@@ -11,11 +11,12 @@ import (
 	"github.com/rs/cors"
 )
 
-/*Manejadores() => handler del las peticiones */
+/*Manejadores() => handler de las peticiones */
 func Manejadores() {
 	router := mux.NewRouter()
 
 	router.HandleFunc("/registro", middleware.ChequeoBD(routers.Registro)).Methods("POST")
+	router.HandleFunc("/login", middleware.ChequeoBD(routers.Login)).Methods("POST")
 
 	PORT := os.Getenv("PORT")
 	if PORT == "" {
