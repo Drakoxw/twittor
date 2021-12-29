@@ -4,8 +4,6 @@ import (
 	"encoding/json"
 	"net/http"
 
-	//"time"
-
 	"github.com/Drakoxw/twittor/db"
 	"github.com/Drakoxw/twittor/jwt"
 	"github.com/Drakoxw/twittor/models"

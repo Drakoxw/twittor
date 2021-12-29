@@ -17,7 +17,7 @@ func GenerarToken(u models.Usuario) (string, error) {
 		"nombre":   u.Nombre,
 		"apellido": u.Apellido,
 		"_id":      u.ID.Hex(),
-		"exp":      time.Now().Add(24 * time.Hour),
+		"exp":      time.Now().Add(24 * time.Hour).Unix(),
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, payload)

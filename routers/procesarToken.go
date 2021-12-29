@@ -21,27 +21,24 @@ func ProcesarToken(token string) (*models.Claim, bool, string, error) {
 	clave := []byte("ErrorenlaFirma")
 	claim := &models.Claim{}
 
-	splitToken := strings.Split(token, "Bearer")
-	if len(splitToken) != 2 {
+	splitToken := strings.Split(token, ".")
+
+	if len(splitToken) != 3 {
 		return claim, false, "", errors.New("formato de token no valido")
 	}
 
-	token = strings.TrimSpace(splitToken[1])
-	tkn, err := jwt.ParseWithClaims(token, claim, func(t *jwt.Token) (interface{}, error) {
+	tkn, _ := jwt.ParseWithClaims(token, claim, func(t *jwt.Token) (interface{}, error) {
 		return clave, nil
 	})
-	if err == nil {
+	if tkn.Valid {
 		_, encontrado, Id := db.BuscarUsuario(claim.Email)
 		if encontrado {
 			Email = claim.Email
 			IdUser = Id
 		}
 		return claim, encontrado, Id, nil
+	} else {
+		return claim, false, string(""), errors.New("no admitido")
 	}
-
-	if !tkn.Valid {
-		return claim, false, string(""), errors.New("token vencido")
-	}
-	return claim, false, "", err
 
 }
